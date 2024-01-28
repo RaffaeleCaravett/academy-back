@@ -26,7 +26,12 @@ public class SecretController {
     if(validation.hasErrors()){
         throw new BadRequestException(validation.getAllErrors());
     }
-    return secretService.save(secret);
+    List<Secret> secretList = this.getAll();
+    if(!secretList.isEmpty()){
+        return secretService.save(secret);
+    }else{
+        throw new BadRequestException("C'è già un secret salvato");
+    }
 }
 
 @GetMapping("")
