@@ -8,6 +8,7 @@ import com.example.academy.payloads.entities.UserLoginSuccessDTO;
 import com.example.academy.payloads.entities.UserRegistrationDTO;
 import com.example.academy.security.JWTTools;
 import com.example.academy.user.User;
+import com.example.academy.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
 import org.springframework.http.HttpStatus;
@@ -61,18 +62,6 @@ public class AuthController {
     @ResponseStatus(HttpStatus.OK)
     public Token verifyRefreshToken(@PathVariable String refreshToken){
         return jwtTools.verifyRefreshToken(refreshToken);
-    }
-
-    @PostMapping("/upload/{id}")
-    public String uploadAvatar(@PathVariable long id, @RequestParam("immagine_profilo") MultipartFile body) throws IOException {
-        System.out.println("Received request - ID: " + id);
-
-        if (body != null) {
-            System.out.println("Received file - Name: " + body.getOriginalFilename());
-        } else {
-            System.out.println("No file received");
-        }
-        return utenteService.uploadAvatar(id,body);
     }
 
 

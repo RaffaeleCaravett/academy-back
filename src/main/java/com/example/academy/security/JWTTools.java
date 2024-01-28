@@ -4,6 +4,7 @@ package com.example.academy.security;
 import com.example.academy.exception.UnauthorizedException;
 import com.example.academy.payloads.entities.Token;
 import com.example.academy.user.User;
+import com.example.academy.user.UserRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -20,7 +21,8 @@ public class JWTTools {
     @Value("${spring.jwt.secret}")
     private String secret;
 
-    @Autowired UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
     public Token createToken(User user){
 
         String accessToken=Jwts.builder().setSubject(String.valueOf(user.getId()))// Subject <-- A chi appartiene il token
