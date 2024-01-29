@@ -1,6 +1,8 @@
 package com.example.academy.materia;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.*;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,10 @@ public class MateriaService {
 return materiaRepository.save(materia);
     }
 
-    public List<Materia> getAll(){
-        return materiaRepository.findAll();
+    public Page<Materia> getAll(int page,int size , String orderBy){
+    Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
+
+        return materiaRepository.findAll(pageable);
     }
 
     public Materia updateById(long id,Materia materia){

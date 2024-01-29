@@ -29,8 +29,10 @@ public class MateriaController {
         return materiaService.save(materia);
     }
     @GetMapping("")
-    public List<Materia> getAll() {
-        return materiaService.getAll();
+    public Page<Materia> getAll(@RequestParam(defaultValue = "0") int page,
+                                @RequestParam(defaultValue = "9") int size,
+                                @RequestParam(defaultValue = "id") String orderBy) {
+        return materiaService.getAll(page, size, orderBy);
     }
     @GetMapping("/{id}")
     public Materia findById(@PathVariable long id){
