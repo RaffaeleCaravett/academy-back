@@ -20,7 +20,7 @@ public class UserService {
         found.setNome(body.nome());
         found.setEmail(body.email());
         found.setCognome(body.cognome());
-        found.setEta(body.età());
+        found.setEta(body.eta());
         return utenteRepository.save(found);
     }
 

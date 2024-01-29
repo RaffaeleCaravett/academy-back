@@ -1,7 +1,8 @@
 package com.example.academy.exception;
 
-import com.example.unbreackable.payloads.errors.ErrorsDTO;
-import com.example.unbreackable.payloads.errors.ErrorsWithListDTO;
+
+import com.example.academy.payloads.errors.ErrorsDTO;
+import com.example.academy.payloads.errors.ErrorsWithListDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
