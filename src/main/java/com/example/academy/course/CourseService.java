@@ -71,5 +71,7 @@ Corso corso= courseRepository.findById(id).get();
         Corso found = this.findById(id);
         courseRepository.delete(found);
     }
-
+public List<Corso> findByParams(String nome,double prezzo,String descrizione,long docente_id){
+        return courseRepository.findByNomeContainingOrPrezzoEqualsOrDescrizioneContainingOrDocente_id(nome,prezzo,descrizione,docente_id);
+}
 }

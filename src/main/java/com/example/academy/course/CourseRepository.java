@@ -9,8 +9,7 @@ import java.util.List;
 
 @Repository
 public interface CourseRepository extends JpaRepository<Corso,Long> {
-    //@Query("SELECT c FROM Corso c " +
-      //      "LEFT JOIN c.docente d " +
-        //    "WHERE :param MEMBER OF [c.nome, CAST(c.prezzo AS string), c.descrizione, d.nome, d.materia.nome]")
-  //  List<Corso> findCoursesByParam(@Param("param") String param);
+
+
+    List<Corso> findByNomeContainingOrPrezzoEqualsOrDescrizioneContainingOrDocente_id(String nome,Double prezzo,String descrizione, long docente_id);
 }

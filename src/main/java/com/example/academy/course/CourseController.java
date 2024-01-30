@@ -9,6 +9,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/corso")
 public class CourseController {
@@ -44,7 +46,10 @@ public class CourseController {
         return false;
     }
     }
-
+@GetMapping("/params")
+public List<Corso> findByParams(@RequestParam(defaultValue = "") String name, @RequestParam(defaultValue = "0") double price, @RequestParam(defaultValue = "") String descrizione, @RequestParam(defaultValue = "0") long docente_id){
+    return courseService.findByParams(name,price,descrizione,docente_id);
+    }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public Corso updateById(@PathVariable long id,@RequestBody CorsoDTO corsoDTO){

@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/docente")
 public class DocenteController {
@@ -31,6 +33,10 @@ public class DocenteController {
                               @RequestParam(defaultValue = "9") int size,
                               @RequestParam(defaultValue = "id") String orderBy) {
         return docenteService.getAll(page, size, orderBy);
+    }
+    @GetMapping("/list")
+    public List<Docente> getAllList() {
+        return docenteService.getAll();
     }
     @GetMapping("/{id}")
     public Docente findById(@PathVariable long id){

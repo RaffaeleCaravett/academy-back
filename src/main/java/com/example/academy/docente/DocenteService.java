@@ -45,6 +45,9 @@ public class DocenteService {
 
         return docenteRepository.findAll(pageable);
     }
+    public List<Docente> getAll() {
+        return docenteRepository.findAll();
+    }
 
     public Docente findById(long id) throws NotFoundException {
         return docenteRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
