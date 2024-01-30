@@ -1,6 +1,7 @@
 package com.example.academy.course;
 
 import com.example.academy.docente.Docente;
+import com.example.academy.materia.Materia;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +24,10 @@ public class Corso {
     joinColumns = @JoinColumn(name = "corso_id"),
     inverseJoinColumns = @JoinColumn(name = "docente_id"))
     private List<Docente> docente;
+    @ManyToMany
+    @JoinTable(name="corso_materia",
+            joinColumns = @JoinColumn(name = "corso_id"),
+            inverseJoinColumns = @JoinColumn(name = "materia_id"))
+    private List<Materia> materia;
 
 }

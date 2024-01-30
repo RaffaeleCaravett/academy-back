@@ -14,6 +14,8 @@ public record CorsoDTO(
         @NotEmpty(message = "La descrizione è necessaria")
         String descrizione,
         @NotNull(message = "L'id del docente è necessario")
-        List<Long> docente_id
+        List<Long> docente_id,
+         @NotNull(message = "L'id della materia è necessario")
+                List<Long> materia_id
 ) {
 }

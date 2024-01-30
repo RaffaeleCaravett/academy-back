@@ -4,6 +4,8 @@ import com.example.academy.docente.Docente;
 import com.example.academy.docente.DocenteRepository;
 import com.example.academy.exception.BadRequestException;
 import com.example.academy.exception.NotFoundException;
+import com.example.academy.materia.Materia;
+import com.example.academy.materia.MateriaRepository;
 import com.example.academy.payloads.entities.CorsoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.*;
@@ -23,7 +25,8 @@ public class CourseService {
     CourseRepository courseRepository;
     @Autowired
     DocenteRepository docenteRepository;
-
+@Autowired
+    MateriaRepository materiaRepository;
     public Corso save(CorsoDTO corsoDTO){
         Corso corso = new Corso();
 
@@ -31,10 +34,16 @@ public class CourseService {
         corso.setPrezzo(corsoDTO.prezzo());
         corso.setDescrizione(corsoDTO.descrizione());
         List<Docente> docenteList= new ArrayList<>();
+List<Materia> materiaList = new ArrayList<>();
 
         for(Long l : corsoDTO.docente_id()){
             docenteList.add(docenteRepository.findById(l).get());
         }
+
+        for(Long l : corsoDTO.materia_id()){
+            materiaList.add(materiaRepository.findById(l).get());
+        }
+        corso.setMateria(materiaList);
         corso.setDocente(docenteList);
 
     return courseRepository.save(corso);
@@ -58,12 +67,16 @@ Corso corso= courseRepository.findById(id).get();
         corso.setPrezzo(corsoDTO.prezzo());
         corso.setDescrizione(corsoDTO.descrizione());
         List<Docente> docenteList= new ArrayList<>();
+        List<Materia> materiaList = new ArrayList<>();
 
         for(Long l : corsoDTO.docente_id()){
             docenteList.add(docenteRepository.findById(l).get());
         }
         corso.setDocente(docenteList);
-
+        for(Long l : corsoDTO.materia_id()){
+            materiaList.add(materiaRepository.findById(l).get());
+        }
+        corso.setMateria(materiaList);
         return courseRepository.save(corso);
     }
 
@@ -71,7 +84,7 @@ Corso corso= courseRepository.findById(id).get();
         Corso found = this.findById(id);
         courseRepository.delete(found);
     }
-public List<Corso> findByParams(String nome,double prezzo,String descrizione,long docente_id){
-        return courseRepository.findByNomeContainingOrPrezzoEqualsOrDescrizioneContainingOrDocente_id(nome,prezzo,descrizione,docente_id);
+public List<Corso> findByParams(String nome,double prezzo,String descrizione,long docente_id,long materia_id){
+        return courseRepository.findByNomeContainingAndPrezzoEqualsAndDescrizioneContainingAndDocente_IdAndMateria_Id(nome,prezzo,descrizione,docente_id,materia_id);
 }
 }

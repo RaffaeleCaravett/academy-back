@@ -21,7 +21,6 @@ public class MateriaController {
     MateriaService materiaService;
 
     @PostMapping("")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public Materia save(@RequestBody @Validated Materia materia, BindingResult validation) {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());

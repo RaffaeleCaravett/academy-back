@@ -11,5 +11,5 @@ import java.util.List;
 public interface CourseRepository extends JpaRepository<Corso,Long> {
 
 
-    List<Corso> findByNomeContainingOrPrezzoEqualsOrDescrizioneContainingOrDocente_id(String nome,Double prezzo,String descrizione, long docente_id);
+    List<Corso> findByNomeContainingAndPrezzoEqualsAndDescrizioneContainingAndDocente_IdAndMateria_Id(String nome,Double prezzo,String descrizione, long docente_id,long materia_id);
 }

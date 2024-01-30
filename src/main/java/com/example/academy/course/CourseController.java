@@ -47,8 +47,9 @@ public class CourseController {
     }
     }
 @GetMapping("/params")
-public List<Corso> findByParams(@RequestParam(defaultValue = "") String name, @RequestParam(defaultValue = "0") double price, @RequestParam(defaultValue = "") String descrizione, @RequestParam(defaultValue = "0") long docente_id){
-    return courseService.findByParams(name,price,descrizione,docente_id);
+public List<Corso> findByParams(@RequestParam(defaultValue = "") String name, @RequestParam(defaultValue = "0") double price, @RequestParam(defaultValue = "") String descrizione, @RequestParam(defaultValue = "0"
+) long docente_id,@RequestParam(defaultValue = "") long materia_id){
+    return courseService.findByParams(name,price,descrizione,docente_id,materia_id);
     }
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
