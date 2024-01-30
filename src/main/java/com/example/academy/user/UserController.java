@@ -25,7 +25,7 @@ public class UserController {
     public void getProfile(@AuthenticationPrincipal User currentUser){
         utenteService.findByIdAndDelete(currentUser.getId());
     };
-    @GetMapping(value = "/{id}")
+    @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
     public User findById(@PathVariable int id)  {
         return utenteService.findById(id);

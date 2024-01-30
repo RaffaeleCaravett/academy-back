@@ -67,7 +67,7 @@ public class AuthController {
 
     @GetMapping("/user")
     public Page<User> getUser(@RequestParam(defaultValue = "0") int page,
-                              @RequestParam(defaultValue = "10") int size,
+                              @RequestParam(defaultValue = "5") int size,
                               @RequestParam(defaultValue = "id") String orderBy){
         return authService.getUtenti(page, size, orderBy);
     }
