@@ -58,25 +58,23 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
             String id = jwtTools.extractIdFromToken(token);
             User currentUtente = usersService.findById(Long.parseLong(id));
-           // currentUtente.getAuthorities().forEach(System.out::println);
+            // currentUtente.getAuthorities().forEach(System.out::println);
+
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(currentUtente, null, currentUtente.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-            //Authentication authentication = new UsernamePasswordAuthenticationToken(currentUtente, null, currentUtente.getAuthorities());
-            // SecurityContextHolder.getContext().setAuthentication(authentication);
 
             filterChain.doFilter(request, response);
         }
 
     }
-
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
         // Questo metodo serve per specificare quando il filtro JWTAuthFilter non debba entrare in azione
         // Ad es tutte le richieste al controller /auth/** non devono essere filtrate
         String pathWithArguments = request.getServletPath() + request.getQueryString();
 
-        List<String> excludedPaths = Arrays.asList("/auth","/corso","/docente","/materia","/secret");
+        List<String> excludedPaths = Arrays.asList("/auth","/corso","/secret");
 
         return excludedPaths.stream().anyMatch(pathWithArguments::startsWith);    }
 }

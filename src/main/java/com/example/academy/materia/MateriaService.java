@@ -27,7 +27,7 @@ return materiaRepository.save(materia);
     public Materia updateById(long id,Materia materia){
         Materia materia1= materiaRepository.findById(id).get();
         materia1.setNome(materia.getNome());
-        return materiaRepository.save(materia);
+        return materiaRepository.save(materia1);
     }
 
     public boolean deleteById(long id){
