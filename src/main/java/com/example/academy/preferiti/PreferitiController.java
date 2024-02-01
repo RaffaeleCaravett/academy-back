@@ -42,4 +42,8 @@ public class PreferitiController {
     public Preferiti getById(@PathVariable long id){
         return preferitiService.getById(id);
     }
+    @GetMapping("/svuota/{id}")
+    public Preferiti svuotaById(@PathVariable long id){
+        return preferitiService.svuotaById(id);
+    }
 }

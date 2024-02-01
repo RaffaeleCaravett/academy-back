@@ -1,5 +1,6 @@
 package com.example.academy.user;
 
+import com.example.academy.exception.BadRequestException;
 import com.example.academy.exception.NotFoundException;
 import com.example.academy.payloads.entities.UserRegistrationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,11 @@ public class UserController {
     @PreAuthorize("hasAuthority('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT) // <-- 204 NO CONTENT
     public void findByIdAndDelete(@PathVariable int id) throws NotFoundException {
-        utenteService.findByIdAndDelete(id);
+        if(id != 1){
+            utenteService.findByIdAndDelete(id);
+        }else{
+            throw new BadRequestException("Non puoi eliminare questo utente");
+        }
     }
 
 }

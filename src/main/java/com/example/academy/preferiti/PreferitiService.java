@@ -64,6 +64,11 @@ public Preferiti updateById(long id, PreferitiDTO preferitiDTO){
     return preferitiRepository.save(preferiti1);
 }
 
+public Preferiti svuotaById(long id){
+        Preferiti preferiti= this.getById(id);
+        preferiti.getCorso().clear();
+        return preferitiRepository.save(preferiti);
 
+}
 
 }
