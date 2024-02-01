@@ -84,7 +84,15 @@ Corso corso= courseRepository.findById(id).get();
         Corso found = this.findById(id);
         courseRepository.delete(found);
     }
-public List<Corso> findByParams(String nome,double prezzo,String descrizione,long docente_id,long materia_id){
-        return courseRepository.findByNomeContainingAndPrezzoEqualsAndDescrizioneContainingAndDocente_IdAndMateria_Id(nome,prezzo,descrizione,docente_id,materia_id);
+public Page<Corso> findByParams(String nome,double prezzo,String descrizione,long docente_id,int page,int size,String orderBy){
+    Pageable pageable = PageRequest.of(page, size, Sort.by(orderBy));
+    if(docente_id!=0&&prezzo==0){
+        return courseRepository.findByNomeContainingIgnoreCaseAndDescrizioneContainingIgnoreCaseAndDocente_IdEquals(nome,descrizione,docente_id,pageable);
+    }else if(docente_id==0&&prezzo==0){
+        return courseRepository.findByNomeContainingIgnoreCaseAndDescrizioneContainingIgnoreCase(nome,descrizione,pageable);
+    }else if(docente_id==0&&prezzo!=0){
+        return courseRepository.findByNomeContainingIgnoreCaseAndDescrizioneContainingIgnoreCaseAndPrezzoEquals(nome,descrizione,prezzo,pageable);
+    }else {
+        return courseRepository.findByNomeContainingIgnoreCaseAndPrezzoEqualsAndDescrizioneContainingIgnoreCaseAndDocente_IdEquals(nome,prezzo,descrizione,docente_id,pageable);    }
 }
 }
