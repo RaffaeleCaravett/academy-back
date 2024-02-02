@@ -22,7 +22,7 @@ public class CarrelloController {
     return carrelloService.save(carrelloDTO);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/user/{user_id}")
     public Carrello findByUserId(@PathVariable long user_id){
         return carrelloService.getByUserId(user_id);
     }

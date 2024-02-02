@@ -2,8 +2,10 @@ package com.example.academy.carrello;
 
 import com.example.academy.course.Corso;
 import com.example.academy.course.CourseRepository;
+import com.example.academy.exception.BadRequestException;
 import com.example.academy.payloads.entities.CarrelloDTO;
 import com.example.academy.user.UserRepository;
+import com.fasterxml.jackson.databind.JsonSerializable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,7 +38,7 @@ public class CarrelloService {
         Set set = new HashSet<>(corsi);
 
         List<Corso> corsoList= new ArrayList<>();
-        corsoList.addAll(corsoList);
+        corsoList.addAll(set);
         carrello.setCorso(corsoList);
 
         return carrelloRepository.save(carrello);
@@ -54,7 +56,7 @@ public class CarrelloService {
         Set set = new HashSet<>(corsi);
 
         List<Corso> corsoList = new ArrayList<>();
-        corsoList.addAll(corsoList);
+        corsoList.addAll(set);
         carrello.setCorso(corsoList);
 
         return carrelloRepository.save(carrello);
@@ -69,6 +71,6 @@ public class CarrelloService {
     }
 
 public Carrello getByUserId(long userId){
-        return  carrelloRepository.findByUser_Id(userId);
+        return  carrelloRepository.findByUser_Id(userId).orElseThrow(() -> new BadRequestException("Non ci sono carrelli per l'user_id: " + userId));
 }
 }

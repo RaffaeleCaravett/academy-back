@@ -3,6 +3,7 @@ package com.example.academy.acquisto;
 import com.example.academy.exception.BadRequestException;
 import com.example.academy.payloads.entities.AcquistoDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,7 @@ public class AcquistoController {
     }
 
     @GetMapping("")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Acquisto> getAll(){
         return acquistoService.getAll();
     }
