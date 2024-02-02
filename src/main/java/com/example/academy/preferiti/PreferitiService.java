@@ -13,7 +13,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PreferitiService {
@@ -60,7 +62,12 @@ public Preferiti updateById(long id, PreferitiDTO preferitiDTO){
     for(Long l : preferitiDTO.corso_id()){
         corsos.add(courseRepository.findById(l).get());
     }
-    preferiti1.setCorso(corsos);
+
+    Set<Corso> set = new HashSet<>(corsos);
+
+    List<Corso> newList = new ArrayList<>();
+    newList.addAll(set);
+    preferiti1.setCorso(newList);
     return preferitiRepository.save(preferiti1);
 }
 
