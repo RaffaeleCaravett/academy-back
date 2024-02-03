@@ -95,4 +95,8 @@ public Page<Corso> findByParams(String nome,double prezzo,String descrizione,lon
     }else {
         return courseRepository.findByNomeContainingIgnoreCaseAndPrezzoEqualsAndDescrizioneContainingIgnoreCaseAndDocente_IdEquals(nome,prezzo,descrizione,docente_id,pageable);    }
 }
+public Page<Corso> findByNome(String nome,int page, int size, String orderBy){
+        Pageable pageable = PageRequest.of(page ,size, Sort.by(orderBy));
+        return courseRepository.findAllByNomeContainingIgnoreCase(nome,pageable);
+}
 }
